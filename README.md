@@ -6,13 +6,13 @@ local Window = Fluent:CreateWindow({
     Title = "Xylo Hub",
     SubTitle = "by Sky",
     TabWidth = 160,
-    Size = UDim2.fromOffset(530, 340),
-    Acrylic = true,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
--- Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     General = Window:AddTab({ Title = "General", Icon = "home" }),
     Skil = Window:AddTab({ Title = "Skil", Icon = "battery-charging" }),
@@ -22,174 +22,206 @@ local Tabs = {
 
 local Options = Fluent.Options
 
-local Dropdown -- Variable to store the Dropdown instance
-local SelectedBoss = "None" -- Variable to store the selected Boss
 
--- Function to create and update the Dropdown
-local function UpdateDropdown()
-    Dropdown = Tabs.General:AddDropdown("Boss", {
-        Title = "Boss",
-        Values = {"Shadow", "Gojo", "Kashimo", "Sukuna", "Snow Bandit Leader", "Shank", "Monkey King", "Sand Man", "Bomb Man", "Bandit Leader", "Artoria", "Uraume", "Gojo [Unleashed]", "Sukuna [Half Power]", "Rimuru", "Killua"},
-        Multi = false,
-        Default = 1,
-    })
-
-    Dropdown:SetValue(SelectedBoss)
-
-    Dropdown:OnChanged(function(Value)
-        SelectedBoss = Value
-    end)
+-- Update function to update boss list
+local function UpdateBossList()
+  local bosses = {}
+  for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+    if v.Name ~= "" then
+      table.insert(bosses, v.Name)
+    end
+  end
+  return bosses
 end
 
-UpdateDropdown() -- Call the function to create the initial Dropdown
+-- Boss dropdown with dynamic list update
+local Dropdown = Tabs.General:AddDropdown("Boss", {
+  Title = "Boss",
+  Values = UpdateBossList(),
+  Multi = false,
+  Default = 1,
+})
 
+Dropdown:OnChanged(function(Value)
+  SelectedBoss = Value
+end)
+
+-- Check if boss exists before starting auto farm
 local Toggle = Tabs.General:AddToggle("Auto Farm Boss", { Title = "Auto Farm Boss", Default = false })
 
 Toggle:OnChanged(function(Value)
-    _G.AutoFarm = Value
+  _G.AutoFarm = Value
 
-    while _G.AutoFarm do
-        wait()
-        if SelectedBoss ~= "None" then
-            local BossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
-        end
+  if _G.AutoFarm then
+    local availableBosses = UpdateBossList()
+    if not selectedBoss or not table.find(availableBosses, selectedBoss) then
+      -- Show error message if selected boss is not available
+      Window:Toast({
+        Title = "Error",
+        Content = "Selected boss is not available. Please select a valid boss.",
+        Duration = 5,
+        Icon = "error",
+      })
+      return
     end
+  end
+
+  while _G.AutoFarm do
+    wait()
+    if SelectedBoss ~= "None" then
+      local bossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = bossCFrame
+    end
+  end
 end)
 
 Options.MyToggle:SetValue(false)
+
 
 local Weaponlist = {}
 local Weapon = nil
-
-for i, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-    table.insert(Weaponlist, v.Name)
-end
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+    table.insert(Weaponlist,v.Name)
+    end
 
 Tabs.General:AddDropdown("Weapon", {
-    Title = "Weapon",
-    Values = Weaponlist,
-    Multi = false,
-    Default = nil,
-    Callback = function(v)
+        Title = "Weapon",
+        Values = Weaponlist,
+        Multi = false,
+        Default = nil,
+        Callback = function(v)
         _G.Weapon = v
-    end
-})
+       end
+   })
 
-local Toggle = Tabs.General:AddToggle("Auto Equip", { Title = "Auto Equip", Default = false })
 
-Toggle:OnChanged(function(a)
+
+     local Toggle = Tabs.General:AddToggle("Auto Equip", {Title = "Auto Equip", Default = false })
+    Toggle:OnChanged(function(a)
     _G.AutoEquiped = a
-end)
-
+    end)
+    
 spawn(function()
-    while wait() do
-        if _G.AutoEquiped then
-            pcall(function()
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(_G.Weapon))
-            end)
-        end
-    end
+while wait() do
+if _G.AutoEquiped then
+pcall(function()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(_G.Weapon))
 end)
+end
+end
+end)    
 
-local Toggle = Tabs.General:AddToggle("Auto Attack", { Title = "Auto Attack", Default = false })
+    local Toggle = Tabs.General:AddToggle("Auto Attack", {Title = "Auto Attack", Default = false })
+    Toggle:OnChanged(function(ah)
+_G.Ato = ah
+while _G.Ato do wait()
+game:GetService'VirtualUser':CaptureController()
+game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+end
+    end)
 
-Toggle:OnChanged(function(ah)
-    _G.Ato = ah
-    while _G.Ato do
-        wait()
-        game:GetService'VirtualUser':CaptureController()
-        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-    end
-end)
 
-local Toggle = Tabs.General:AddToggle("Auto Chests", { Title = "Auto Chests", Default = false })
-
-Toggle:OnChanged(function(wow)
-    _G.aa = wow
-    while _G.aa do
-        wait()
-        for i, v in pairs(game:GetService("Workspace").Chests:GetDescendants()) do
-            if v.ClassName == "ProximityPrompt" then
-                fireproximityprompt(v, 30)
+    local Toggle = Tabs.General:AddToggle("Auto Chests", {Title = "Auto Chests", Default = false })
+    Toggle:OnChanged(function(wow)
+        _G.aa = wow
+        while _G.aa do wait()
+for i,v in pairs(game:GetService("Workspace").Chests:GetDescendants()) do
+if v.ClassName == "ProximityPrompt" then
+fireproximityprompt(v,30)
+                end
             end
         end
-    end
-end)
-
-local Toggle = Tabs.Skil:AddToggle("Auto Skil Z", { Title = "Auto Skil Z", Default = false })
-
-Toggle:OnChanged(function(G)
-    _G.AutoZ = G
-
-    spawn(function()
-        while wait(.1) do
-            pcall(function()
-                if _G.AutoZ then
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
-                end
-            end)
-        end
     end)
-end)
 
-Options.MyToggle:SetValue(false)
 
-local Toggle = Tabs.Skil:AddToggle("Auto Skil X", { Title = "Auto Skil X", Default = false })
 
-Toggle:OnChanged(function(G)
-    _G.AutoX = G
 
-    spawn(function()
-        while wait(.1) do
-            pcall(function()
-                if _G.AutoX then
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+
+
+
+
+    local Toggle = Tabs.Skil:AddToggle("Auto Skil Z", {Title = "Auto Skil Z", Default = false })
+
+    Toggle:OnChanged(function(G)
+       _G.AutoZ = G
+
+spawn(function()
+while wait(.1) do
+    pcall(function()
+if _G.AutoZ then
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
                 end
-            end)
-        end
-    end)
+        end)
+   end
 end)
 
-Options.MyToggle:SetValue(false)
+    end)
 
-local Toggle = Tabs.Skil:AddToggle("Auto Skil C", { Title = "Auto Skil C", Default = false })
+    Options.MyToggle:SetValue(false)
+    
 
-Toggle:OnChanged(function(G)
-    _G.AutoC = G
 
-    spawn(function()
-        while wait(.1) do
-            pcall(function()
-                if _G.AutoC then
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
+    local Toggle = Tabs.Skil:AddToggle("Auto Skil X", {Title = "Auto Skil X", Default = false })
+
+    Toggle:OnChanged(function(G)
+       _G.AutoX = G
+
+spawn(function()
+while wait(.1) do
+    pcall(function()
+if _G.AutoX then
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
                 end
-            end)
-        end
-    end)
+        end)
+   end
 end)
 
-Options.MyToggle:SetValue(false)
+    end)
 
-local Toggle = Tabs.Skil:AddToggle("Auto Skil V", { Title = "Auto Skil V", Default = false })
+    Options.MyToggle:SetValue(false)
 
-Toggle:OnChanged(function(G)
-    _G.AutoV = G
 
-    spawn(function()
-        while wait(.1) do
-            pcall(function()
-                if _G.AutoV then
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
+    local Toggle = Tabs.Skil:AddToggle("Auto Skil C", {Title = "Auto Skil C", Default = false })
+
+    Toggle:OnChanged(function(G)
+       _G.AutoC = G
+
+spawn(function()
+while wait(.1) do
+    pcall(function()
+if _G.AutoC then
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
                 end
-            end)
-        end
-    end)
+        end)
+   end
 end)
 
-Options.MyToggle:SetValue(false)
+    end)
 
-local players = {}
+    Options.MyToggle:SetValue(false)
+ 
+
+
+    local Toggle = Tabs.Skil:AddToggle("Auto Skil V", {Title = "Auto Skil V", Default = false })
+
+    Toggle:OnChanged(function(G)
+       _G.AutoV = G
+
+spawn(function()
+while wait(.1) do
+    pcall(function()
+if _G.AutoV then
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+                end
+        end)
+   end
+end)
+
+    end)
+
+    Options.MyToggle:SetValue(false)
+
+players = {}
 
 for i, v in pairs(game:GetService("Players"):GetChildren()) do
     table.insert(players, v.Name)
@@ -261,57 +293,60 @@ Tabs.TP:AddButton({
     end
 })
 
-local shop = {}
 
-for i, v in pairs(game:GetService("Workspace").Shop:GetChildren()) do
-    table.insert(shop, v.Name)
+    shop = {}
+for i ,v in pairs(game:GetService("Workspace").Shop:GetChildren()) do
+table.insert(shop,v.Name)
 end
 
 Tabs.TP:AddDropdown("shop", {
-    Title = "shop",
-    Values = shop,
-    Multi = false,
-    Default = nil,
-    Callback = function(ma)
+        Title = "shop",
+        Values = shop,
+        Multi = false,
+        Default = nil,
+        Callback = function(ma)
         shop = ma
-    end
-})
+       end
+   })
 
-Tabs.TP:AddButton({
-    Title = "TP To Shop",
-    Description = "",
-    Callback = function()
-        for i, v in pairs(game:GetService("Workspace").Shop[shop]:GetDescendants()) do
-            if v.ClassName == "ProximityPrompt" then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame * CFrame.new(0, 5, 0)
-            end
+
+
+        Tabs.TP:AddButton({
+        Title = "TP To Shop",
+        Description = "",
+        Callback = function()
+      		for i,v in pairs(game:GetService("Workspace").Shop[shop]:GetDescendants()) do
+if v.ClassName == "ProximityPrompt" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame * CFrame.new(0,5,0)
+end
+      end
         end
-    end
-})
+    })
+    
 
-local map = {}
 
-for i, v in pairs(game:GetService("Workspace").Locations:GetChildren()) do
-    table.insert(map, v.Name)
+map = {}
+for i ,v in pairs(game:GetService("Workspace").Locations:GetChildren()) do
+table.insert(map,v.Name)
 end
 
 Tabs.TP:AddDropdown("island", {
-    Title = "island",
-    Values = map,
-    Multi = false,
-    Default = nil,
-    Callback = function(mt)
+        Title = "island",
+        Values = map,
+        Multi = false,
+        Default = nil,
+        Callback = function(mt)
         map = mt
-    end
-})
-
-Tabs.TP:AddButton({
-    Title = "TP To island",
-    Description = "TP To island",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Locations[map].CFrame * CFrame.new(0, -100, 0)
-    end
-})
+       end
+   })
+   
+        Tabs.TP:AddButton({
+        Title = "TP To island",
+        Description = "TP To island",
+        Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Locations[map].CFrame * CFrame.new(0,-100,0)
+        end
+    })
 
 -- Addons:
 -- SaveManager (Allows you to have a configuration system)
@@ -337,7 +372,9 @@ SaveManager:SetFolder("FluentScriptHub/specific-game")
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
 
+
 Window:SelectTab(1)
+
 
 -- You can use the SaveManager:LoadAutoloadConfig() to load a config
 -- which has been marked to be one that auto loads!
