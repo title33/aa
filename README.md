@@ -22,57 +22,68 @@ local Tabs = {
 
 local Options = Fluent.Options
 
+local DropdownValues = {"Shadow", "Gojo", "Kashimo", "Sukuna", "Snow Bandit Leader", "Shank", "Monkey King", "Sand Man", "Bomb Man", "Bandit Leader", "Artoria", "Uraume", "Gojo [Unleashed]", "Sukuna [Half Power]", "Rimuru", "Killua"}
+local SelectedBoss = "None"
 
--- Update function to update boss list
-local function UpdateBossList()
-  local bosses = {}
-  for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
-    if v.Name ~= "" then
-      table.insert(bosses, v.Name)
-    end
-  end
-  return bosses
-end
-
--- Boss dropdown with dynamic list update
 local Dropdown = Tabs.General:AddDropdown("Boss", {
-  Title = "Boss",
-  Values = UpdateBossList(),
-  Multi = false,
-  Default = 1,
+    Title = "Boss",
+    Values = DropdownValues,
+    Multi = false,
+    Default = 1,
 })
 
+Dropdown:SetValue(SelectedBoss)
+
 Dropdown:OnChanged(function(Value)
-  SelectedBoss = Value
+    SelectedBoss = Value
 end)
 
--- Check if boss exists before starting auto farm
-local Toggle = Tabs.General:AddToggle("Auto Farm Boss", { Title = "Auto Farm Boss", Default = false })
+
+local function CheckDropdownValues()
+    local CurrentValues = {}
+    for _, player in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(CurrentValues, player.Name)
+    end
+
+    local NewValues = {}
+    for _, value in pairs(DropdownValues) do
+        if table.find(CurrentValues, value) then
+            table.insert(NewValues, value)
+        end
+    end
+
+    Dropdown:SetValues(NewValues)
+    if not table.find(NewValues, SelectedBoss) then
+        Dropdown:SetValue("None")
+        SelectedBoss = "None"
+    end
+end
+
+
+spawn(function()
+    while wait(30) do 
+        CheckDropdownValues()
+    end
+end)
+
+CheckDropdownValues()
+
+
+
+
+
+local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Auto Farm Boss", Default = false })
 
 Toggle:OnChanged(function(Value)
-  _G.AutoFarm = Value
+    _G.AutoFarm = Value
 
-  if _G.AutoFarm then
-    local availableBosses = UpdateBossList()
-    if not selectedBoss or not table.find(availableBosses, selectedBoss) then
-      -- Show error message if selected boss is not available
-      Window:Toast({
-        Title = "Error",
-        Content = "Selected boss is not available. Please select a valid boss.",
-        Duration = 5,
-        Icon = "error",
-      })
-      return
+    while _G.AutoFarm do
+        wait()
+        if SelectedBoss ~= "None" then
+            local BossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
+        end
     end
-  end
-
-  while _G.AutoFarm do
-    wait()
-    if SelectedBoss ~= "None" then
-      local bossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = bossCFrame
-    end
-  end
 end)
 
 Options.MyToggle:SetValue(false)
