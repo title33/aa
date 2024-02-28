@@ -1,8 +1,7 @@
-
-
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/title33/SaveManager/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
 local Options = Fluent.Options
 
 -- Variables
@@ -25,18 +24,6 @@ function No()
         end
     end)
 end
-
-function TP(CFramePosition)
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local HumanoidRootPart = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-
-    if HumanoidRootPart then
-        HumanoidRootPart.CFrame = CFramePosition
-    end
-end
-
-No() -- Call the function No
 
 -- Global variables
 _G.p = false
@@ -122,25 +109,6 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
-local boss = {
-    'Shadow',
-    'Gojo',
-    'Kashimo',
-    'Sukuna',
-    'Snow Bandit Leader',
-    'Shank',
-    'Monkey King',
-    'Sand Man',
-    'Bomb Man',
-    'Bandit Leader',
-    'Artoria',
-    'Uraume',
-    'Gojo [Unleashed]',
-    'Sukuna [Half Power]',
-    'Rimuru',
-    'Killua',
-}
-
 -- Add Dropdowns in the "General" Tab
 Tabs.Farm:AddDropdown("Select Boss", {
     Title = "Select Boss",
@@ -170,7 +138,7 @@ SaveManager:SetFolder("FluentScriptHub")
 SaveManager:SetFolder("FluentScriptHub/specific-game")
 SaveManager:BuildConfigSection(Tabs.Settings)
 
--- Select the 1st Tab
+-- Select the 1st Tabb
 Window:SelectTab(1)
 
 -- Load Autoload Config of SaveManager
