@@ -7,9 +7,9 @@ local Window = Fluent:CreateWindow({
     SubTitle = "by Sky",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
@@ -34,8 +34,9 @@ local Dropdown = Tabs.General:AddDropdown("Boss", {
 
 Dropdown:SetValue(SelectedBoss)
 
-Dropdown:OnChanged(function(Value)
+Dropdown:OnChanged(function(Value) -- Add "end" here
     SelectedBoss = Value
+    
 end)
 
 
@@ -53,9 +54,11 @@ local function CheckDropdownValues()
     end
 
     Dropdown:SetValues(NewValues)
+
+    -- Handle invalid selection
     if not table.find(NewValues, SelectedBoss) then
-        Dropdown:SetValue("None")
         SelectedBoss = "None"
+        Dropdown:SetValue(SelectedBoss)
     end
 end
 
@@ -72,14 +75,12 @@ CheckDropdownValues()
 
 
 
-local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Auto Farm Boss", Default = false })
-
 Toggle:OnChanged(function(Value)
     _G.AutoFarm = Value
 
     while _G.AutoFarm do
         wait()
-        if SelectedBoss ~= "None" then
+        if SelectedBoss then
             local BossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
         end
@@ -87,7 +88,6 @@ Toggle:OnChanged(function(Value)
 end)
 
 Options.MyToggle:SetValue(false)
-
 
 local Weaponlist = {}
 local Weapon = nil
