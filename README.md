@@ -398,14 +398,15 @@ spawn(function()
 
             if KatanaFrame then
                 StatusRimuru:SetTitle("Katana : ✅")
-                StatusRimuru:SetDesc("Have : " .. KatanaFrame.Number.Text)
+                StatusRimuru:SetDesc("Katana : ")
             else
                 StatusRimuru:SetTitle("Katana : ❌")
-                StatusRimuru:SetDesc("Have : 0")
+                StatusRimuru:SetDesc("Katana : ")
             end
         end)
     end
 end)
+
 
 
 
