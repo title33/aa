@@ -22,6 +22,23 @@ local Tabs = {
 
 local Options = Fluent.Options
 
+function No()
+    for i, v in ipairs(workspace.Lives:GetChildren()) do
+        if not game:GetService("Players"):GetPlayerFromCharacter(v) then -- if not player then
+            local cleanedName = string.gsub(v.Name, "%d+$", "")
+            v.Name = tostring(cleanedName)
+        end
+    end
+
+    workspace.Lives.ChildAdded:Connect(function(model)
+        wait()
+        if not game:GetService("Players"):GetPlayerFromCharacter(model) then -- if not player then
+            local cleanedName = string.gsub(model.Name, "%d+$", "")
+            model.Name = cleanedName
+        end
+    end)
+end
+
 Boss = {
  "ไม่เลือก",
  "Natsu",
@@ -58,6 +75,7 @@ end)
 local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Auto Farm Boss", Default = false })
 
 Toggle:OnChanged(function(t)
+ No()
 _G.p = t
 
 function A()
