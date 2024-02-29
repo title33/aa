@@ -385,23 +385,20 @@ Tabs.TP:AddDropdown("island", {
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Locations[map].CFrame * CFrame.new(0,-100,0)
         end
     })
-
-local StatusRimuru =  Tabs.Inventory:AddParagraph({
+local StatusRimuru = Tabs.Inventory:AddParagraph({
   Title = "Katana"
 })
 
 spawn(function()
   while wait() do
     pcall(function()
-      if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame then
-        StatusRimuru:SetTitle("Katana : ✅")
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Katana then
+        StatusRimuru:SetTitle("Katana : ")
       else
-        StatusRimuru:SetTitle("Katana : ❌")
+        StatusRimuru:SetTitle("Katana : ")
       end
     end)
   end
-end)
-
 
 -- Addons:
 -- SaveManager (Allows you to have a configuration system)
