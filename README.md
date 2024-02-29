@@ -22,60 +22,37 @@ local Tabs = {
 
 local Options = Fluent.Options
 
-    
- local Toggle = Tabs. General:AddToggle("Auto Farm Boss", {Title = "Auto Farm Boss", Default = false })
-    Toggle:OnChanged(function(ssk)
-_G.eami = ssk
 
-function MonsSpawned(Mons)
-    for _, v in pairs(game:GetService('Workspace').Lives:GetDescendants()) do
-        if v.Name == Mons and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health >= 1 then
-            return true
+
+
+local Dropdown = Tabs.General:AddDropdown("Boss", {
+    Title = "Boss",
+    Values = {"Shadow", "Gojo", "Kashimo", "Sukuna", "Snow Bandit Leader", "Shank", "Monkey King", "Sand Man", "Bomb Man", "Bandit Leader", "Artoria", "Uraume", "Gojo [Unleashed]", "Sukuna [Half Power]", "Rimuru", "Killua"},
+    Multi = false,
+    Default = 1,
+})
+
+Dropdown:SetValue("None")
+
+Dropdown:OnChanged(function(Value)
+    SelectedBoss = Value
+end)
+
+local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Auto Farm Boss", Default = false })
+
+Toggle:OnChanged(function(Value)
+    _G.AutoFarm = Value
+
+    while _G.AutoFarm do
+        wait()
+        if SelectedBoss ~= "None" then
+            local BossCFrame = game.Workspace[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
         end
     end
-    return false
-end
-
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.eami then
-                local MonNames = {
-                    'Shadow',
-                    'Gojo',
-                    'Kashimo',
-                    'Sukuna',
-                    'Artoria',
-                    'Uraume',
-		            'Gojo [Unleashed]',
-                    'Sukuna [Half Power]',
-		            'Rimuru',
-                    'Killua',
-                    'Ichigo',
-                    'Choso'
-                   
-                }
-
-                for _, v in pairs(game:GetService('Workspace').Lives:GetDescendants()) do
-                    if table.find(MonNames, v.Name) and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health >= 1 then
-                        repeat
-                        CA()
-                            wait()   
-                            v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                            v.HumanoidRootPart.Transparency = 0.9
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 7)
-                        until _G.eami == false or v.Humanoid.Health <= 0
-                    end
-                end
-            end
-        end)
-    end
 end)
-	
-    end)
 
-
+Options.MyToggle:SetValue(false)
 
 
 local Weaponlist = {}
