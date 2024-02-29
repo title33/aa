@@ -39,6 +39,11 @@ function No()
     end)
 end
 
+function TP(targetCFrame)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetCFrame
+end
+
+
 Boss = {
  "ไม่เลือก",
  "Natsu",
@@ -88,25 +93,27 @@ end)
 Options.MyToggle:SetValue(false)
 
 spawn(function()
-        while wait() do 
-    pcall(function()
-     if _G.p then
-      for _,v in pairs(game:GetService("Workspace").Lives:GetDescendants()) do
-        if v.Name == free and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
-  repeat task.wait()
-  A()
-    v.HumanoidRootPart.Size = Vector3.new(10,10,10)
-    v.HumanoidRootPart.Transparency = 0.9
-    v.Humanoid.WalkSpeed = 0
-    v.Humanoid.JumpPower = 0
-TP(v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)*CFrame.Angles(math.rad(-90),0,0))
-   until _G.p == false
-          end
-         end
-       end
-     end)
+    while wait() do
+        pcall(function()
+            if _G.p then
+                for _, v in pairs(game:GetService("Workspace").Lives:GetDescendants()) do
+                    if v.Name == free and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+                        repeat
+                            wait()
+                            A()
+                            v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                            v.HumanoidRootPart.Transparency = 0.9
+                            v.Humanoid.WalkSpeed = 0
+                            v.Humanoid.JumpPower = 0
+                            TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                        until not _G.p
+                    end
+                end
+            end
+        end)
     end
 end)
+
 
 local Weaponlist = {}
 local Weapon = nil
