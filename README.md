@@ -432,7 +432,7 @@ spawn(function()
   end
 
 local Kashimo's Pole2 = Tabs.Inventory:AddParagraph({
-  Title = "Kashimo's Pole V1"
+  Title = "Kashimo's Pole V2"
 })
 
 spawn(function()
