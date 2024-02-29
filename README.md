@@ -387,25 +387,23 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Loca
     })
 
 Tabs.Inventory:AddParagraph({
-    Title = "Katana",
-    Content = ""
-})
+  Title = "Katana",
+  Content = "Status : ",
 
-spawn(function()
-    while wait() do
-        pcall(function()
-            local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame
-            if KatanaFrame then
-                StatusRimuru:SetTitle("Katana : ✅")
-                StatusRimuru:SetDesc("Katana : ")
-            else
-                StatusRimuru:SetTitle("Katana : ❌")
-                StatusRimuru:SetDesc("Katana : ")
-            end
-        end)
+  function()
+    if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame then
+
+      StatusRimuru:SetTitle("Katana : ✅")
+
+      StatusRimuru:SetDesc("Have : " .. (game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame.Number.Text))
+    else
+ 
+      StatusRimuru:SetTitle("Katana : ❌")
+
+      StatusRimuru:SetDesc("Have : 0")
     end
-end)
-
+  end
+})
 
 
 
