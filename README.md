@@ -386,48 +386,19 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Loca
         end
     })
 
-Tabs.Inventory:AddParagraph({
+local katanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame
+
+if katanaFrame then
+  Tabs.Inventory:AddParagraph({
     Title = "Katana",
-    Content = "Status : "
-})
-
-local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            local KatanaText = KatanaFrame.Number.Text
-
-            if KatanaText ~= nil and tonumber(KatanaText) > 0 then
-                StatusRimuru:SetTitle("Katana : ✅")
-                StatusRimuru:SetDesc("Have : " .. KatanaText)
-            else
-                StatusRimuru:SetTitle("Katana : ❌")
-                StatusRimuru:SetDesc("Have : 0")
-            end
-        end)
-    end
-end)
-
-
-Tabs.Inventory:AddParagraph({
-  Title = Katana,
-  Content = "Have" .. game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame[Katana].Frame.Number.Text
-})
-
-spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"] then
-        StatusRimuru:SetTitle("Katana : ✅")
-        StatusRimuru:SetDesc("Have : " .. (game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame.Text))
-      else
-        StatusRimuru:SetTitle("Katana : ❌")
-        StatusRimuru:SetDesc("Have : 0")
-      end
-    end)
-  end
-end)
+    Content = "Katana : ✅"
+  })
+else
+  Tabs.Inventory:AddParagraph({
+    Title = "Katana",
+    Content ="Katana : ❌"
+  })
+end
 
 
 -- Addons:
