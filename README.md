@@ -16,7 +16,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     General = Window:AddTab({ Title = "General", Icon = "home" }),
     Skil = Window:AddTab({ Title = "Skil", Icon = "battery-charging" }),
-    TP = Window:AddTab({ Title = "Tp", Icon = "chevrons-right" }),
+    TP = Window:AddTab({ Title = "TP", Icon = "chevrons-right" }),
     Inventory = Window:AddTab({ Title = "Inventory", Icon = "scroll" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
