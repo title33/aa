@@ -386,7 +386,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Loca
         end
     })
 
-Tabs.Inventory:AddParagraph({
+local Tabs.Inventory:AddParagraph({
   Title = "Katana"
 })
 
