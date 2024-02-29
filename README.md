@@ -385,97 +385,102 @@ Tabs.TP:AddDropdown("island", {
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Locations[map].CFrame * CFrame.new(0,-100,0)
         end
     })
+
 local StatusRimuru = Tabs.Inventory:AddParagraph({
-  Title = "Katana"
+    Title = "Katana"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Katana then
-        StatusRimuru:SetTitle("Katana : ✅")
-      else
-        StatusRimuru:SetTitle("Katana : ❌")
-      end
-    end)
-  end
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Katana") then
+                StatusRimuru:SetTitle("Katana : ✅")
+            else
+                StatusRimuru:SetTitle("Katana : ❌")
+            end
+        end)
+    end
+end)
 
 local Cutlass = Tabs.Inventory:AddParagraph({
-  Title = "Cutlass"
+    Title = "Cutlass"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Cutlass then
-        Cutlass:SetTitle("Cutlass : ✅")
-      else
-        Cutlass:SetTitle("Cutlass : ❌")
-      end
-    end)
-  end
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Cutlass") then
+                Cutlass:SetTitle("Cutlass : ✅")
+            else
+                Cutlass:SetTitle("Cutlass : ❌")
+            end
+        end)
+    end
+end)
 
-
-local Kashimo's Pole = Tabs.Inventory:AddParagraph({
-  Title = "Kashimo's Pole V1"
+local KashimoPoleCurse = Tabs.Inventory:AddParagraph({
+    Title = "Kashimo's Pole V1 [Curse]"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Kashimo's Pole [Curse] then
-        Kashimo's Pole:SetTitle("Kashimo's Pole V1 : ✅")
-      else
-        Kashimo's Pole:SetTitle("Kashimo's Pole V1 : ❌")
-      end
-    end)
-  end
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Kashimo's Pole [Curse]") then
+                KashimoPoleCurse:SetTitle("Kashimo's Pole V1 [Curse] : ✅")
+            else
+                KashimoPoleCurse:SetTitle("Kashimo's Pole V1 [Curse] : ❌")
+            end
+        end)
+    end
+end)
 
-local Kashimo's Pole2 = Tabs.Inventory:AddParagraph({
-  Title = "Kashimo's Pole V2"
+local KashimoPolePowerless = Tabs.Inventory:AddParagraph({
+    Title = "Kashimo's Pole V2 [Powerless]"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Kashimo's Pole [Powerless] then
-        Kashimo's Pole2:SetTitle("Kashimo's Pole V2 : ✅")
-      else
-        Kashimo's Pole2:SetTitle("Kashimo's Pole V2 : ❌")
-      end
-    end)
-  end
-
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Kashimo's Pole [Powerless]") then
+                KashimoPolePowerless:SetTitle("Kashimo's Pole V2 [Powerless] : ✅")
+            else
+                KashimoPolePowerless:SetTitle("Kashimo's Pole V2 [Powerless] : ❌")
+            end
+        end)
+    end
+end)
 
 local Saber = Tabs.Inventory:AddParagraph({
-  Title = "Saber"
+    Title = "Saber"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFram.Saber then
-        Saber:SetTitle("Saber : ✅")
-      else
-        Saber:SetTitle("Saber : ❌")
-      end
-    end)
-  end
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Saber") then
+                Saber:SetTitle("Saber : ✅")
+            else
+                Saber:SetTitle("Saber : ❌")
+            end
+        end)
+    end
+end)
 
 local Yoru = Tabs.Inventory:AddParagraph({
-  Title = "Yoru"
+    Title = "Yoru"
 })
 
 spawn(function()
-  while wait() do
-    pcall(function()
-      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFram.Yoru then
-        Yoru:SetTitle("Yoru : ✅")
-      else
-        Yoru:SetTitle("Yoru : ❌")
-      end
-    end)
-  end
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Yoru") then
+                Yoru:SetTitle("Yoru : ✅")
+            else
+                Yoru:SetTitle("Yoru : ❌")
+            end
+        end)
+    end
+end)
 
 
 -- Addons:
