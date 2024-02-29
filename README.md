@@ -394,9 +394,9 @@ spawn(function()
   while wait() do
     pcall(function()
       if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame then
-        StatusRimuru:SetTitle("Katana : ")
+        StatusRimuru:SetTitle("Katana : ✅")
       else
-        StatusRimuru:SetTitle("Katana : ")
+        StatusRimuru:SetTitle("Katana : ❌")
       end
     end)
   end
