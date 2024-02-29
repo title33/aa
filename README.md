@@ -92,7 +92,7 @@ spawn(function()
     pcall(function()
      if _G.p then
       for _,v in pairs(game:GetService("Workspace").Lives:GetDescendants()) do
-        if v.Name == Boss and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+        if v.Name == free and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
   repeat task.wait()
   A()
     v.HumanoidRootPart.Size = Vector3.new(10,10,10)
