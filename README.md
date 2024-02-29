@@ -385,9 +385,10 @@ Tabs.TP:AddDropdown("island", {
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Locations[map].CFrame * CFrame.new(0,-100,0)
         end
     })
-Tabs.Inventory:AddParagraph({
+
+local Katana Tabs.Inventory:AddParagraph({
   Title = "Katana",
-  Content = "Status : "
+  Content = "Status : " 
 })
 
 spawn(function()
@@ -403,6 +404,7 @@ spawn(function()
     end)
   end
 end)
+
 
 
 -- Addons:
