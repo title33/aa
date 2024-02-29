@@ -393,12 +393,90 @@ spawn(function()
   while wait() do
     pcall(function()
       if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Katana then
-        StatusRimuru:SetTitle("Katana : ")
+        StatusRimuru:SetTitle("Katana : ✅")
       else
-        StatusRimuru:SetTitle("Katana : ")
+        StatusRimuru:SetTitle("Katana : ❌")
       end
     end)
   end
+
+local Cutlass = Tabs.Inventory:AddParagraph({
+  Title = "Cutlass"
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Cutlass then
+        Cutlass:SetTitle("Cutlass : ✅")
+      else
+        Cutlass:SetTitle("Cutlass : ❌")
+      end
+    end)
+  end
+
+
+local Kashimo's Pole = Tabs.Inventory:AddParagraph({
+  Title = "Kashimo's Pole V1"
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Kashimo's Pole [Curse] then
+        Kashimo's Pole:SetTitle("Kashimo's Pole V1 : ✅")
+      else
+        Kashimo's Pole:SetTitle("Kashimo's Pole V1 : ❌")
+      end
+    end)
+  end
+
+local Kashimo's Pole2 = Tabs.Inventory:AddParagraph({
+  Title = "Kashimo's Pole V1"
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame.Kashimo's Pole [Powerless] then
+        Kashimo's Pole2:SetTitle("Kashimo's Pole V2 : ✅")
+      else
+        Kashimo's Pole2:SetTitle("Kashimo's Pole V2 : ❌")
+      end
+    end)
+  end
+
+
+local Saber = Tabs.Inventory:AddParagraph({
+  Title = "Saber"
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFram.Saber then
+        Saber:SetTitle("Saber : ✅")
+      else
+        Saber:SetTitle("Saber : ❌")
+      end
+    end)
+  end
+
+local Yoru = Tabs.Inventory:AddParagraph({
+  Title = "Yoru"
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFram.Yoru then
+        Yoru:SetTitle("Yoru : ✅")
+      else
+        Yoru:SetTitle("Yoru : ❌")
+      end
+    end)
+  end
+
 
 -- Addons:
 -- SaveManager (Allows you to have a configuration system)
