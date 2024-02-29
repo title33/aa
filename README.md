@@ -410,6 +410,25 @@ spawn(function()
 end)
 
 
+Tabs.Inventory:AddParagraph({
+  Title = Katana,
+  Content = "Have" .. game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame[Katana].Frame.Number.Text
+})
+
+spawn(function()
+  while wait() do
+    pcall(function()
+      if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"] then
+        StatusRimuru:SetTitle("Katana : ✅")
+        StatusRimuru:SetDesc("Have : " .. (game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame.Text))
+      else
+        StatusRimuru:SetTitle("Katana : ❌")
+        StatusRimuru:SetDesc("Have : 0")
+      end
+    end)
+  end
+end)
+
 
 -- Addons:
 -- SaveManager (Allows you to have a configuration system)
