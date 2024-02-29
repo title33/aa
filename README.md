@@ -391,12 +391,16 @@ Tabs.Inventory:AddParagraph({
     Content = "Status : "
 })
 
+local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame
+
 spawn(function()
     while wait() do
         pcall(function()
-            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame.Number.Text ~= nil then
+            local KatanaText = KatanaFrame.Number.Text
+
+            if KatanaText ~= nil and tonumber(KatanaText) > 0 then
                 StatusRimuru:SetTitle("Katana : ✅")
-                StatusRimuru:SetDesc("Have : " .. game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame.Number.Text)
+                StatusRimuru:SetDesc("Have : " .. KatanaText)
             else
                 StatusRimuru:SetTitle("Katana : ❌")
                 StatusRimuru:SetDesc("Have : 0")
