@@ -394,8 +394,7 @@ Tabs.Inventory:AddParagraph({
 spawn(function()
     while wait() do
         pcall(function()
-            local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame
-
+            local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame["Katana"].Frame
             if KatanaFrame then
                 StatusRimuru:SetTitle("Katana : ✅")
                 StatusRimuru:SetDesc("Katana : ")
