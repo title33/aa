@@ -386,22 +386,25 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Loca
         end
     })
 
- Tabs.Inventory:AddParagraph({
-  Title = "Combat",
-  Content = "Status : "
- })
- spawn(function()
-        while wait() do
-            pcall(function()
-             if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat") then
-                   StatusRimuru:SetTitle("Combat : ✅")
-                    StatusRimuru:SetDesc("Have : "..(Players.LocalPlayer.Backpack["Combat"].Value))
-                else
-                  StatusRimuru:SetTitle("Combat : ❌")
-                    StatusRimuru:SetDesc("Have : 0")
-                end
-end)
-end
+Tabs.Inventory:AddParagraph({
+    Title = "Katana",
+    Content = ""
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            local KatanaFrame = game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["Katana"].Frame
+
+            if KatanaFrame then
+                StatusRimuru:SetTitle("Katana : ✅")
+                StatusRimuru:SetDesc("Have : " .. KatanaFrame.Number.Text)
+            else
+                StatusRimuru:SetTitle("Katana : ❌")
+                StatusRimuru:SetDesc("Have : 0")
+            end
+        end)
+    end
 end)
 
 
