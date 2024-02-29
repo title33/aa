@@ -39,8 +39,13 @@ function No()
     end)
 end
 
-function TP(targetCFrame)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetCFrame
+local Plrs = game:GetService("Players")
+local Plr = Plrs.LocalPlayer
+local HRP = Plr.Character.HumanoidRootPart
+
+function TP(...)
+    local Args = {...}
+    HRP.CFrame = CFrame.new(Args[1] , Args[2] , Args[3])
 end
 
 
