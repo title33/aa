@@ -22,38 +22,73 @@ local Tabs = {
 
 local Options = Fluent.Options
 
-
+Boss = {
+ "ไม่เลือก",
+ "Natsu",
+ "Choso",
+ "Ichigo",
+ "Killua",
+ "Gojo [Unleashed]",
+ "Sukuna [Half Power]",
+ "Gojo",
+ "Sukuna",
+ "Shank",
+ "Kashimo",
+ "Artoria",
+ "Bomb Man",
+ "Sand Man",
+ "Monkey King",
+ "Bandit Leader"
+}
 
 
 local Dropdown = Tabs.General:AddDropdown("Boss", {
     Title = "Boss",
-    Values = {"Shadow", "Gojo", "Kashimo", "Sukuna", "Snow Bandit Leader", "Shank", "Monkey King", "Sand Man", "Bomb Man", "Bandit Leader", "Artoria", "Uraume", "Gojo [Unleashed]", "Sukuna [Half Power]", "Rimuru", "Killua"},
+ Values = {"ไม่เลือก", "Bandit", "Bandit Leader", "Clown Pirate", "Marine", "Monkey", "Monkey King", "Bomb Man", "Sand Man", "Snow Bandit", "Snow Bandit Leader"},
     Multi = false,
     Default = 1,
 })
 
 Dropdown:SetValue("None")
 
-Dropdown:OnChanged(function(Value)
-    SelectedBoss = Value
+Dropdown:OnChanged(function(v)
+    free = v
 end)
 
 local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Auto Farm Boss", Default = false })
 
-Toggle:OnChanged(function(Value)
-    _G.AutoFarm = Value
+Toggle:OnChanged(function(t)
+_G.p = t
 
-    while _G.AutoFarm do
-        wait()
-        if SelectedBoss ~= "None" then
-            local BossCFrame = game.Workspace[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
-        end
-    end
+function A()
+  game:GetService'VirtualUser':CaptureController()
+game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+end
+
 end)
 
 Options.MyToggle:SetValue(false)
 
+spawn(function()
+        while wait() do 
+    pcall(function()
+     if _G.p then
+      for _,v in pairs(game:GetService("Workspace").Lives:GetDescendants()) do
+        if v.Name == Boss and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+  repeat task.wait()
+  A()
+    v.HumanoidRootPart.Size = Vector3.new(10,10,10)
+    v.HumanoidRootPart.Transparency = 0.9
+    v.Humanoid.WalkSpeed = 0
+    v.Humanoid.JumpPower = 0
+TP(v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)*CFrame.Angles(math.rad(-90),0,0))
+   until _G.p == false
+          end
+         end
+       end
+     end)
+    end
+end)
 
 local Weaponlist = {}
 local Weapon = nil
