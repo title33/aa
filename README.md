@@ -7,9 +7,9 @@ local Window = Fluent:CreateWindow({
     SubTitle = "by Sky",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
@@ -22,72 +22,72 @@ local Tabs = {
 
 local Options = Fluent.Options
 
-local DropdownValues = {"Shadow", "Gojo", "Kashimo", "Sukuna", "Snow Bandit Leader", "Shank", "Monkey King", "Sand Man", "Bomb Man", "Bandit Leader", "Artoria", "Uraume", "Gojo [Unleashed]", "Sukuna [Half Power]", "Rimuru", "Killua"}
-local SelectedBoss = "None"
+local bossNames = {}
+
+local function PopulateBossDropdown()
+    local validBossNames = {
+        'Shadow',
+        'Gojo',
+        'Kashimo',
+        'Sukuna',
+        'Snow Bandit Leader',
+        'Shank',
+        'Monkey King',
+        'Sand Man',
+        'Bomb Man',
+        'Bandit Leader',
+        'Artoria',
+        'Uraume',
+        'Gojo [Unleashed]',
+        'Sukuna [Half Power]',
+        'Rimuru',
+        'Killua'
+    }
+
+    for _, boss in pairs(game.Workspace:GetDescendants()) do
+        if table.find(validBossNames, boss.Name) then
+            table.insert(bossNames, boss.Name)
+        end
+    end
+end 
+
+
 
 local Dropdown = Tabs.General:AddDropdown("Boss", {
     Title = "Boss",
-    Values = DropdownValues,
+    Values = bossNames,
     Multi = false,
     Default = 1,
 })
 
-Dropdown:SetValue(SelectedBoss)
+Dropdown:SetValue("None")
 
-Dropdown:OnChanged(function(Value) -- Add "end" here
+Dropdown:OnChanged(function(Value)
     SelectedBoss = Value
-    
+    print("Selected Boss:", SelectedBoss)
 end)
 
+local function CreateTeleportToBossToggle()
+    local Toggle = Tabs.General:AddToggle("Auto Farm Boss", {Title = "Auto Farm Boss", Default = false })
 
-local function CheckDropdownValues()
-    local CurrentValues = {}
-    for _, player in pairs(game:GetService("Players"):GetChildren()) do
-        table.insert(CurrentValues, player.Name)
-    end
+    Toggle:OnChanged(function(Value)
+        _G.AutoFarm = Value
 
-    local NewValues = {}
-    for _, value in pairs(DropdownValues) do
-        if table.find(CurrentValues, value) then
-            table.insert(NewValues, value)
+        while _G.AutoFarm do
+            wait()
+            if SelectedBoss ~= "None" then
+                local BossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
+            end
         end
-    end
+    end)
 
-    Dropdown:SetValues(NewValues)
-
-    -- Handle invalid selection
-    if not table.find(NewValues, SelectedBoss) then
-        SelectedBoss = "None"
-        Dropdown:SetValue(SelectedBoss)
-    end
+    Options.MyToggle:SetValue(false)
 end
 
+PopulateBossDropdown()
+CreateTeleportToBossToggle()
 
-spawn(function()
-    while wait(30) do 
-        CheckDropdownValues()
-    end
-end)
-
-CheckDropdownValues()
-
-
-
-
-
-Toggle:OnChanged(function(Value)
-    _G.AutoFarm = Value
-
-    while _G.AutoFarm do
-        wait()
-        if SelectedBoss then
-            local BossCFrame = game:GetService("Workspace").Lives[SelectedBoss].HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BossCFrame
-        end
-    end
-end)
-
-Options.MyToggle:SetValue(false)
 
 local Weaponlist = {}
 local Weapon = nil
