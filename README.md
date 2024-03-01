@@ -115,7 +115,6 @@ spawn(function()
     end
 end)
 
-local _G.eami = false
 
 function MonsSpawned(Mons)
     for i, v in pairs(game.Workspace:GetDescendants()) do
