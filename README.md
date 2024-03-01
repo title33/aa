@@ -13,8 +13,8 @@ ui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ui.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ui.BorderSizePixel = 0
 ui.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-ui.Size = UDim2.new(0, 68, 0, 67)
-ui.Image = "http://www.roblox.com/asset/?id=14420244942"
+ui.Size = UDim2.new(0, 55, 0, 57)
+ui.Image = "rbxassetid://14491125970"
 ui.MouseButton1Click:Connect(function()
     game.CoreGui:FindFirstChild("ScreenGui").Enabled = not game.CoreGui:FindFirstChild("ScreenGui").Enabled
 end)
@@ -35,7 +35,7 @@ local Window = Fluent:CreateWindow({
     Title = "Xylo Hub",
     SubTitle = "by Sky",
     TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
+    Size = UDim2.fromOffset(530, 340),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
