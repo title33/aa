@@ -115,6 +115,65 @@ spawn(function()
     end
 end)
 
+local _G.eami = false
+
+function MonsSpawned(Mons)
+    for i, v in pairs(game.Workspace:GetDescendants()) do
+        if v.Name == Mons and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+            return true
+        end
+    end
+    return false
+end
+
+function FarmBoss(v)
+    if v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+        repeat
+            No()
+            wait()
+            v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+            v.HumanoidRootPart.Transparency = 0.9
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 7)
+        until _G.eami == false or v.Humanoid.Health <= 0
+    end
+end
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.eami then
+                local MonNames = {
+                    "Shadow",
+                    "Gojo",
+                    "Kashimo",
+                    "Sukuna",
+                    "Artoria",
+                    "Uraume",
+                    "Gojo [Unleashed]",
+                    "Sukuna [Half Power]",
+                    "Rimuru",
+                    "Killua",
+                    "Ichigo",
+                    "Choso"
+                }
+
+                for i, v in pairs(game.Workspace:GetDescendants()) do
+                    if table.find(MonNames, v.Name) then
+                        FarmBoss(v)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+local Toggle = Tabs.General:AddToggle("Auto Farm Boss [ALL]", { Title = "Auto Farm Boss [ALL]", Default = false })
+
+Toggle:OnChanged(function(a)
+    _G.eami = a
+end)
+
+
 
 local Weaponlist = {}
 local Weapon = nil
@@ -480,6 +539,306 @@ spawn(function()
             end
         end)
     end
+end)
+
+local Excalibur = Tabs.Inventory:AddParagraph({
+    Title = "Excalibur"
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Excalibur") then
+                Excalibur:SetTitle("Excalibur : ✅")
+            else
+                Excalibur:SetTitle("Excalibur : ❌")
+            end
+        end)
+    end
+end)
+
+local Cid's Sword = Tabs.Inventory:AddParagraph({
+    Title = "Cid's Sword"
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Cid's Sword") then
+                Cid's Sword:SetTitle("Cid's Sword : ✅")
+            else
+                Cid's Sword:SetTitle("Cid's Sword : ❌")
+            end
+        end)
+    end
+end)
+
+local Rimuru's Sword = Tabs.Inventory:AddParagraph({
+    Title = "Rimuru's Sword"
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Rimuru's Sword") then
+                Rimuru's Sword:SetTitle("Rimuru's Sword : ✅")
+            else
+                Rimuru's Sword:SetTitle("Rimuru's Sword : ❌")
+            end
+        end)
+    end
+end)
+
+local GodCheck = Inventory:AddParagraph({
+        Title = "God Light Fruit",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+local LightFruit = 0
+for _,v in pairs(game.Players[Players.LocalPlayer.Name].Backpack:GetChildren()) do
+if v.Name == "God Light Fruit" then
+    LightFruit = LightFruit + 1
+GodCheck:SetDesc("God Light Fruit : "..(LightFruit))
+else
+  GodCheck:SetDesc("God Light Fruit : "..(LightFruit))
+end
+end
+end)
+end
+end)
+
+local DarkFlameCheck = Inventory:AddParagraph({
+        Title = "Dark Flame Fruit",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+local FlameFruit = 0
+for _,v in pairs(game.Players[Players.LocalPlayer.Name].Backpack:GetChildren()) do
+if v.Name == "Dark Flame Fruit" then
+    FlameFruit = FlameFruit + 1
+DarkFlameCheck:SetDesc("Dark Flame Fruit: "..(FlameFruit))
+else
+  DarkFlameCheck:SetDesc("Dark Flame Fruit : "..(FlameFruit))
+end
+end
+end)
+end
+end)
+
+local FourLeaf = Inventory:AddParagraph({
+        Title = "Four Leaf Clover",
+        Content = "Status : "
+    })
+    
+       spawn(function()
+                    while wait() do
+                        pcall(function()
+FourLeaf:SetDesc("Four Leaf Clover "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["1Four Leaf Clover"].Frame.Number.Text))
+end)
+end
+end)
+
+local Tensa = Inventory:AddParagraph({
+        Title = "Tensa Zangetsu",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Tensa:SetDesc("Tensa Zangetsu "..(
+game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["1Tensa Zangetsu"].Frame.Number.Text))
+end)
+end
+end)
+
+local Six = Inventory:AddParagraph({
+        Title = "Six Eyes",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Six:SetDesc("Six Eyes "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["1Six Eyes"].Frame.Number.Text))
+end)
+end
+end)
+
+local Haki = Inventory:AddParagraph({
+        Title = "Busoshoku Haki Book",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Haki:SetDesc("Busoshoku Haki Book "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Busoshoku Haki Book"].Frame.Number.Text))
+end)
+end
+end)
+
+local Club = Inventory:AddParagraph({
+        Title = "Club Card",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Club:SetDesc("Club Card "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Club Card"].Frame.Number.Text))
+end)
+end
+end)
+
+local Heart = Inventory:AddParagraph({
+        Title = "Heart Card",
+        Content = "Status : "
+    })
+    
+        spawn(function()
+                    while wait() do
+                        pcall(function()
+Heart:SetDesc("Heart Card "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Heart Card"].Frame.Number.Text))
+end)
+end
+end)
+
+local Diamond = Inventory:AddParagraph({
+        Title = "Diamond Card",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Diamond:SetDesc("Diamond Card "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Diamond Card"].Frame.Number.Text))
+end)
+end
+end)
+
+local Infinity = Inventory:AddParagraph({
+        Title = "Infinity Orb",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Infinity:SetDesc("Infinity Orb "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Infinity Orb"].Frame.Number.Text))
+end)
+end
+end)
+
+local Kenbunshoku = Inventory:AddParagraph({
+        Title = "Kenbunshoku Haki Book",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Kenbunshoku:SetDesc("Kenbunshoku Haki Book "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Kenbunshoku Haki Book"].Frame.Number.Text))
+end)
+end
+end)
+
+local Lightning = Inventory:AddParagraph({
+        Title = "Lightning Orb",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Lightning:SetDesc("Lightning Orb "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Lightning Orb"].Frame.Number.Text))
+end)
+end
+end)
+
+local Race = Inventory:AddParagraph({
+        Title = "Race Reroll",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Race:SetDesc("Race Reroll "..(
+game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2Race Reroll"].Frame.Number.Text))
+end)
+end
+end)
+
+local Choso = Inventory:AddParagraph({
+        Title = "[Choso] Cursed Womb",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Choso:SetDesc("[Choso] Cursed Womb "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["2[Choso] Cursed Womb"].Frame.Number.Text))
+end)
+end
+end)
+
+local Fishing = Inventory:AddParagraph({
+        Title = "Fishing Rod",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Fishing:SetDesc("Fishing Rod "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["3Fishing Rod"].Frame.Number.Text))
+end)
+end
+end)
+
+local HakiColor  = Inventory:AddParagraph({
+        Title = "Haki Color Reroll",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+HakiColor:SetDesc("Haki Color Reroll "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["3Haki Color Reroll"].Frame.Number.Text))
+end)
+end
+end)
+
+local Holy  = Inventory:AddParagraph({
+        Title = "Holy Grail",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Holy:SetDesc("Haki Color Reroll "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["3Holy Grail"].Frame.Number.Text))
+end)
+end
+end)
+
+local Sukuna  = Inventory:AddParagraph({
+        Title = "Sukuna Finger",
+        Content = "Status : "
+    })
+    
+    spawn(function()
+                    while wait() do
+                        pcall(function()
+Sukuna:SetDesc("Sukuna Finger "..(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Interface.Inventory.ItemsFrame["3SukunaFinger"].Frame.Number.Text))
+end)
+end
 end)
 
 
