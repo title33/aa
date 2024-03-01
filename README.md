@@ -588,7 +588,7 @@ spawn(function()
     end
 end)
 
-local GodCheck = Inventory:AddParagraph({
+local GodCheck = Tabs.Inventory:AddParagraph({
         Title = "God Light Fruit",
         Content = "Status : "
     })
@@ -609,7 +609,7 @@ end)
 end
 end)
 
-local DarkFlameCheck = Inventory:AddParagraph({
+local DarkFlameCheck = Tabs.Inventory:AddParagraph({
         Title = "Dark Flame Fruit",
         Content = "Status : "
     })
@@ -630,7 +630,7 @@ end)
 end
 end)
 
-local FourLeaf = Inventory:AddParagraph({
+local FourLeaf = Tabs.Inventory:AddParagraph({
         Title = "Four Leaf Clover",
         Content = "Status : "
     })
@@ -643,7 +643,7 @@ end)
 end
 end)
 
-local Tensa = Inventory:AddParagraph({
+local Tensa = Tabs.Inventory:AddParagraph({
         Title = "Tensa Zangetsu",
         Content = "Status : "
     })
@@ -657,7 +657,7 @@ end)
 end
 end)
 
-local Six = Inventory:AddParagraph({
+local Six = Tabs.Inventory:AddParagraph({
         Title = "Six Eyes",
         Content = "Status : "
     })
@@ -670,7 +670,7 @@ end)
 end
 end)
 
-local Haki = Inventory:AddParagraph({
+local Haki = Tabs.Inventory:AddParagraph({
         Title = "Busoshoku Haki Book",
         Content = "Status : "
     })
@@ -683,7 +683,7 @@ end)
 end
 end)
 
-local Club = Inventory:AddParagraph({
+local Club = Tabs.Inventory:AddParagraph({
         Title = "Club Card",
         Content = "Status : "
     })
@@ -696,7 +696,7 @@ end)
 end
 end)
 
-local Heart = Inventory:AddParagraph({
+local Heart = Tabs.Inventory:AddParagraph({
         Title = "Heart Card",
         Content = "Status : "
     })
@@ -709,7 +709,7 @@ end)
 end
 end)
 
-local Diamond = Inventory:AddParagraph({
+local Diamond = Tabs.Inventory:AddParagraph({
         Title = "Diamond Card",
         Content = "Status : "
     })
@@ -722,7 +722,7 @@ end)
 end
 end)
 
-local Infinity = Inventory:AddParagraph({
+local Infinity = Tabs.Inventory:AddParagraph({
         Title = "Infinity Orb",
         Content = "Status : "
     })
@@ -735,7 +735,7 @@ end)
 end
 end)
 
-local Kenbunshoku = Inventory:AddParagraph({
+local Kenbunshoku = Tabs.Inventory:AddParagraph({
         Title = "Kenbunshoku Haki Book",
         Content = "Status : "
     })
@@ -748,7 +748,7 @@ end)
 end
 end)
 
-local Lightning = Inventory:AddParagraph({
+local Lightning = Tabs.Inventory:AddParagraph({
         Title = "Lightning Orb",
         Content = "Status : "
     })
@@ -761,7 +761,7 @@ end)
 end
 end)
 
-local Race = Inventory:AddParagraph({
+local Race = Tabs.Inventory:AddParagraph({
         Title = "Race Reroll",
         Content = "Status : "
     })
@@ -775,7 +775,7 @@ end)
 end
 end)
 
-local Choso = Inventory:AddParagraph({
+local Choso = Tabs.Inventory:AddParagraph({
         Title = "[Choso] Cursed Womb",
         Content = "Status : "
     })
@@ -788,7 +788,7 @@ end)
 end
 end)
 
-local Fishing = Inventory:AddParagraph({
+local Fishing = Tabs.Inventory:AddParagraph({
         Title = "Fishing Rod",
         Content = "Status : "
     })
@@ -801,7 +801,7 @@ end)
 end
 end)
 
-local HakiColor  = Inventory:AddParagraph({
+local HakiColor  = Tabs.Inventory:AddParagraph({
         Title = "Haki Color Reroll",
         Content = "Status : "
     })
@@ -814,7 +814,7 @@ end)
 end
 end)
 
-local Holy  = Inventory:AddParagraph({
+local Holy  = Tabs.Inventory:AddParagraph({
         Title = "Holy Grail",
         Content = "Status : "
     })
@@ -827,7 +827,7 @@ end)
 end
 end)
 
-local Sukuna  = Inventory:AddParagraph({
+local Sukuna  = Tabs.Inventory:AddParagraph({
         Title = "Sukuna Finger",
         Content = "Status : "
     })
