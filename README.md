@@ -1,3 +1,32 @@
+local ScreenGui = Instance.new("ScreenGui")
+local ui = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ui.Name = "ui"
+ui.Parent = ScreenGui
+ui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ui.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ui.BorderSizePixel = 0
+ui.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ui.Size = UDim2.new(0, 68, 0, 67)
+ui.Image = "http://www.roblox.com/asset/?id=14420244942"
+ui.MouseButton1Click:Connect(function()
+    game.CoreGui:FindFirstChild("ScreenGui").Enabled = not game.CoreGui:FindFirstChild("ScreenGui").Enabled
+end)
+
+
+UICorner.CornerRadius = UDim.new(0.300000012, 0)
+UICorner.Parent = ui
+
+
+
+
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/title33/SaveManager/main/README.md"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
