@@ -14,7 +14,7 @@ ui.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ui.BorderSizePixel = 0
 ui.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
 ui.Size = UDim2.new(0, 55, 0, 57)
-ui.Image = "rbxassetid://14491125970"
+ui.Image = "rbxassetid://14491200389"
 ui.MouseButton1Click:Connect(function()
     game.CoreGui:FindFirstChild("ScreenGui").Enabled = not game.CoreGui:FindFirstChild("ScreenGui").Enabled
 end)
@@ -75,7 +75,7 @@ end
 
 
 Boss = {
- "ไม่เลือก",
+ "None",
  "Natsu",
  "Choso",
  "Ichigo",
@@ -96,7 +96,7 @@ Boss = {
 
 local Dropdown = Tabs.General:AddDropdown("Boss", {
     Title = "Boss",
- Values = {"ไม่เลือก", "Bandit", "Bandit Leader", "Clown Pirate", "Marine", "Monkey", "Monkey King", "Bomb Man", "Sand Man", "Snow Bandit", "Snow Bandit Leader"},
+ Values = {"None", "Bandit", "Bandit Leader", "Clown Pirate", "Marine", "Monkey", "Monkey King", "Bomb Man", "Sand Man", "Snow Bandit", "Snow Bandit Leader"},
     Multi = false,
     Default = 1,
 })
