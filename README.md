@@ -557,7 +557,7 @@ spawn(function()
     end
 end)
 
-local Cid's Sword = Tabs.Inventory:AddParagraph({
+local CidSword = Tabs.Inventory:AddParagraph({
     Title = "Cid's Sword"
 })
 
@@ -565,15 +565,15 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Cid's Sword") then
-                Cid's Sword:SetTitle("Cid's Sword : ✅")
+                CidSword:SetTitle("Cid's Sword : ✅")
             else
-                Cid's Sword:SetTitle("Cid's Sword : ❌")
+                CidSword:SetTitle("Cid's Sword : ❌")
             end
         end)
     end
 end)
 
-local Rimuru's Sword = Tabs.Inventory:AddParagraph({
+local RimuruSword = Tabs.Inventory:AddParagraph({
     Title = "Rimuru's Sword"
 })
 
@@ -581,9 +581,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Players.LocalPlayer.PlayerGui.MainUI.Interface.Inventory.WeaponFrame:FindFirstChild("Rimuru's Sword") then
-                Rimuru's Sword:SetTitle("Rimuru's Sword : ✅")
+                RimuruSword:SetTitle("Rimuru's Sword : ✅")
             else
-                Rimuru's Sword:SetTitle("Rimuru's Sword : ❌")
+                RimuruSword:SetTitle("Rimuru's Sword : ❌")
             end
         end)
     end
